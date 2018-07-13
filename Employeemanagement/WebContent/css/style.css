@@ -1,0 +1,27 @@
+body{
+	background: /*#9068be*//*#a9d7d1*/#3a4660;
+}
+
+#header{
+	background:/*#a9d7d1*/#3a4660; 
+	color:/*#000000*//*#a9d7d1*/ /*#9068be*/#e62739;
+	padding-bottom: 0px;
+	margin-bottom: 10px;
+}
+ 
+p{
+	color: grey;
+	font-size: 1.5em;
+	padding: 10px;
+	margin: 10px;
+}
+
+#survey-form{
+	border-radius: 10px;
+	max-width: 900px;
+	margin: auto;
+}
+
+/*#pick-section {
+	display: none;
+}*/
