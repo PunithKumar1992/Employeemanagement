@@ -1,8 +1,13 @@
 package com.bsol.employee.pojo;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -43,6 +48,13 @@ public class Employeee {
 	
 	@Column(name="activestatus")
 	private String activestatus;
+	
+	@Column(name="maxqualification")
+	private String maxqualification;
+	
+
+	@OneToMany(mappedBy="empdetail",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	private List<Educationqualification>eduqualification=new ArrayList<Educationqualification>();
 
 	public String getEmp_id() {
 		return emp_id;
@@ -138,6 +150,31 @@ public class Employeee {
 
 	public void setActivestatus(String activestatus) {
 		this.activestatus = activestatus;
+	}
+
+	public List<Educationqualification> getEduqualification() {
+		return eduqualification;
+	}
+
+	public void setEduqualification(List<Educationqualification> eduqualification) {
+		this.eduqualification = eduqualification;
+	}
+	
+	public String getMaxqualification() {
+		return maxqualification;
+	}
+
+	public void setMaxqualification(String maxqualification) {
+		this.maxqualification = maxqualification;
+	}
+
+	@Override
+	public String toString() {
+		return "Employeee [emp_id=" + emp_id + ", first_name=" + first_name + ", last_name=" + last_name
+				+ ", dateofjoin=" + dateofjoin + ", department=" + department + ", salary=" + salary + ", experience="
+				+ experience + ", permanent_address=" + permanent_address + ", present_address=" + present_address
+				+ ", contact_no=" + contact_no + ", email=" + email + ", activestatus=" + activestatus
+				+ ", eduqualification=" + eduqualification + "]";
 	}
 	
 	

@@ -1,6 +1,8 @@
 package com.bsol.employee.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bsol.employee.Service.EmployeeService;
+import com.bsol.employee.pojo.Educationqualification;
 import com.bsol.employee.pojo.Employeee;
 
 @Controller
@@ -49,10 +52,88 @@ public class Employeecontroller {
 	}
 	
 	@RequestMapping(value="/saveemployee")
-	public String saveemployeeController(@ModelAttribute("newemp")Employeee emp)
+	public String saveemployeeController(@ModelAttribute("newemp")Employeee emp,@RequestParam Map<String, String>reqparam)
 	{
-		empservice.saveemployee(emp);
+		int count = Integer.parseInt(reqparam.get("artcount"));
+	 Educationqualification[]  qulificationarry = new Educationqualification[count];
+	 String maxquali="";
+	 for(int i =0; i<count;i++)
+	 {
+		 qulificationarry[i] = new Educationqualification();
+	 }
+		 String quali="";
+		 String college;
+		 int percentage;
+		 int year ;
+		 
+		 for(int i=1;i<=count;i++)
+		 {
+			 if(reqparam.get("qualification"+i)!=null)
+			 quali = reqparam.get("qualification"+i);
+			 else
+				 quali = "NM";
+			 if(reqparam.get("qualification"+i)!=null)
+			 qulificationarry[i-1].setQualification(reqparam.get("qualification"+i));
+			 else
+				 qulificationarry[i-1].setQualification("NM"); 
+			 if(reqparam.get("college"+i)!=null)
+			 qulificationarry[i-1].setCollege(reqparam.get("college"+i));
+			 else
+				 qulificationarry[i-1].setCollege("NM");
+			 if(reqparam.get("percentage"+i)!="")
+			 qulificationarry[i-1].setPercentage(Integer.parseInt(reqparam.get("percentage"+i)));
+			 else
+			qulificationarry[i-1].setPercentage(0);
+			 if(reqparam.get("completionyear"+i)!="")
+			 qulificationarry[i-1].setCompletionyear(Integer.parseInt(reqparam.get("completionyear"+i)));
+			 else
+				 qulificationarry[i-1].setCompletionyear(0);
+			 switch(quali)
+			 {
+			 case "SSlc":
+				 qulificationarry[i-1].setQualificationvalue(1);
+				 maxquali=quali;
+				 break;
 		
+			 case "PUC":
+			 case "Diploma":
+				 qulificationarry[i-1].setQualificationvalue(2);
+				 maxquali=quali;
+				 break;
+				 
+			 case "BA":
+			 case "BSc":
+			 case "Bcom":
+			 case "BE":
+				 qulificationarry[i-1].setQualificationvalue(3);
+				 maxquali=quali;
+				 break;
+				 
+			 case "MA":
+			 case "Msc":
+			 case "Mcom":
+			 case "MTech":
+				 qulificationarry[i-1].setQualificationvalue(4);
+				 maxquali=quali;
+				 break;
+				 
+			default :
+				 qulificationarry[i-1].setQualificationvalue(0);
+				 maxquali="Not Mentioned";
+				 break;
+				 
+			 }
+			 qulificationarry[i-1].setQemp_id(emp.getEmp_id());
+			 
+		 }
+		 List<Educationqualification> qualilist = new ArrayList<Educationqualification>();
+		for(int i=1;i<=count;i++)
+		{
+			qualilist.add(qulificationarry[i-1]);
+		}
+		emp.setEduqualification(qualilist);
+		emp.setMaxqualification(maxquali);
+		empservice.saveemployee(emp);
 		return"redirect:/index";
 	}
 	
@@ -63,6 +144,17 @@ public class Employeecontroller {
 		emp.setActivestatus("InActive");
 		empservice.updateEmployee(emp);
 		return"redirect:/index";
+	}
+	
+	@RequestMapping(value="/editemployee")
+	public ModelAndView editemployeeController(@RequestParam("emp_id")String emp_id)
+	{
+		Employeee emp = empservice.getEmpById(emp_id);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("editemp", emp);
+		mv.setViewName("editemployee");
+		return mv;
+		
 	}
 
 }

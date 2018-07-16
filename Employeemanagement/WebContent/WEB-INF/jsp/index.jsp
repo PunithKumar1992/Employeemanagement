@@ -37,7 +37,10 @@ td
 padding:0.5em;
 
 }
-
+.error
+{
+color:red;
+}
 </style>
     <title>Employee management</title>
   </head>
@@ -54,13 +57,13 @@ padding:0.5em;
     </header>
 
     <div class="container survey">
-      <form:form method="post" action="saveemployee" modelAttribute="newemp" class="well form-horizontal" id="survey-form" onsubmit="return FormValidation();">
+      <form:form method="post" action="saveemployee" modelAttribute="newemp" class="well form-horizontal" id="survey-form"  onsubmit="return FormValidation();">
      
           <div class="form-group">
             <label class="col-md-4 control-label" for="name" id="name-label">Employee Id <span style="color:red;">*</span></label>  
             <div class="col-md-4">
               <div class="Form control">
-              <form:input path="emp_id" class="form-control" value="BSOL${empid}" id="empid" title="Please fill out this field" readonly="true"/>
+              <form:input path="emp_id" class="form-control" value="BSOL${empid}" id="empid" title="Please fill out this field" readonly="true"/> 
               </div>
              </div>
           </div>
@@ -68,7 +71,8 @@ padding:0.5em;
             <label class="col-md-4 control-label" for="name" id="name-label">First Name <span style="color:red;">*</span></label>  
             <div class="col-md-4">
               <div class="Form control">
-                <form:input  path="first_name" class="form-control" id="firstname" title="Please fill out this field" placeholder="Enter the Employee first name" onchange="return FormValidation();" onblur="return FormValidation();" />
+                <form:input  path="first_name" class="form-control" id="firstname" title="Please fill out this field" placeholder="Enter the Employee first name"/>
+               <label id="firstnamelabel" class="error"></label>
               </div>
              </div>
           </div>
@@ -77,7 +81,8 @@ padding:0.5em;
             <label class="col-md-4 control-label" for="name" id="name-label">Last Name <span style="color:red;">*</span></label>  
             <div class="col-md-4">
               <div class="Form control">
-                <form:input  path="last_name" class="form-control"  id="lastname" title="Please fill out this field" placeholder="Enter the Employee last name" onchange="return FormValidation();" onblur="return FormValidation();"/>
+                <form:input  path="last_name" class="form-control"  id="lastname" title="Please fill out this field" placeholder="Enter the Employee last name" />
+              	 <label id="lastnamelabel" class="error"></label>
               </div>
              </div>
           </div>
@@ -86,8 +91,8 @@ padding:0.5em;
             <label class="col-md-4 control-label" for="name" id="name-label">Date of join <span style="color:red;">*</span></label>  
             <div class="col-md-4">
               <div class="Form control">
-               <form:input  path="dateofjoin" class="datepicker-here datepicker-promo form-control" id="joindate" title="Please Enter the joined date" placeholder="Enter the Employee Joined date" required="required"/> 
-              
+               <form:input  path="dateofjoin" class="datepicker-here datepicker-promo form-control" id="joindate" title="Please Enter the joined date" placeholder="Enter the Employee Joined date" required="required" /> 
+              <label class="error" id="joindatelabel"></label>
 			  </div>
              </div>
           </div>
@@ -109,6 +114,7 @@ padding:0.5em;
                   <form:option value="Analysis">Analysis</form:option>
               
               </form:select>
+              <label class="error" id="departmentlabel"></label>
                              </div>
             </div>
           </div>
@@ -126,7 +132,7 @@ padding:0.5em;
             <label class="col-md-4 control-label">Experience </label>
             <div class="col-md-2">
               <div class="form control">
-               <form:select class="form-control" id="dropdown" style="width:160px;" path="experience">
+               <form:select class="form-control" id="dropdown" style="width:160px;" path="experience" required="required">
                   <form:option value="Select" selected="selected" disabled="true">Select Option</form:option>
                   <form:option value="YES">YES </form:option>
                   <form:option value="NO">NO</form:option>
@@ -160,7 +166,7 @@ padding:0.5em;
             </div>
           </div>
 		  
-		  <!-- <hr><label class="class="col-md-4 control-label" style="margin-left:20%;">Education Details</label></hr>
+		  <hr><label class="class="col-md-4 control-label" style="margin-left:20%;">Education Details</label></hr>
 		  <br>
 		  <br>
 		  <input type="hidden" id="artcount" name="artcount" value="1">
@@ -172,8 +178,8 @@ padding:0.5em;
             <label class="col-md-4 control-label">Qualification </label>
             <div class="col-md-2">
               <div class="form control">
-               <select class="form-control" id="qualification1" name="qualification1" style="width:160px;">
-                  <option value="Select" selected="selected" disabled>Select Option</option>
+               <select class="form-control" id="qualification1" name="qualification1" style="width:160px;" required >
+                  <option value="Select" selected="selected"  disabled>Select Option</option>
                  <option value='SSlc'>SSlc</option>
                   <option value='PUC'>PUC</option>
 				  <option value='Diploma'>Diploma</option>
@@ -203,7 +209,7 @@ padding:0.5em;
             <label class="col-md-4 control-label" for="name" id="name-label">Percentage %</label>  
             <div class="col-md-4">
               <div class="Form control">
-                <input  name="percentage1" class="form-control"  type="text" id="percentage1" title="Please fill out this field" placeholder="Enter the Employee percentage" >
+                <input  name="percentage1" class="form-control" type="text" id="percentage1"  title="Please fill out this field" placeholder="Enter the Employee percentage" >
               </div>
              </div>
           </div>
@@ -212,7 +218,7 @@ padding:0.5em;
             <label class="col-md-4 control-label" for="name" id="name-label">Year of completion </label>  
             <div class="col-md-4">
               <div class="Form control">
-                <input  name="completionyear1" class="form-control"  type="text" id="completionyear1" title="Please fill out this field" placeholder="Enter the Employee passed out year" >
+                <input  name="completionyear1" class="form-control" type="text" id="completionyear1" title="Please fill out this field" placeholder="Enter the Employee passed out year" >
               </div>
              </div>
           </div>
@@ -220,12 +226,13 @@ padding:0.5em;
 		  </div>
 		   
 		  </div>
- -->		  
+		  
 		   <div class="form-group">
             <label class="col-md-4 control-label" for="name" id="name-label">Contact no <span style="color:red;">*</span> </label>  
             <div class="col-md-4">
               <div class="Form control">
-                <form:input  path="contact_no" class="form-control" id="contact" title="Please fill out this field" placeholder="Enter the Employee Contact number" onchange="return FormValidation();" onblur="return FormValidation();" />
+                <form:input  path="contact_no" class="form-control" id="contact" title="Please fill out this field" placeholder="Enter the Employee Contact number" />
+             	<label id="contactlabel" class="error"></label>
               </div>
              </div>
           </div>
@@ -237,6 +244,7 @@ padding:0.5em;
             <div class="col-md-4">
               <div class="form control">
                 <form:input path="email" placeholder="Enter your email address" class="form-control" id="email" title="Please fill out this field" onchange="return FormValidation();" onblur="return FormValidation();" />
+              <label id="emaillabel" class="error"></label>
               </div>
           </div>
           </div>
@@ -294,14 +302,17 @@ padding:0.5em;
   <c:url var="empdelete" value="deleteemployee">
   <c:param name="emp_id" value="${emlist.emp_id}"></c:param>
   </c:url>
+  <c:url var="editemp" value="editemployee">
+  <c:param name="emp_id" value="${emlist.emp_id}"></c:param>
+  </c:url>
   <tr>
-    <td>${emlist.emp_id}</td>
+   <td> <a href="${editemp}">${emlist.emp_id}</a></td>
     <td>${emlist.first_name} ${emlist.last_name}</td>
     <td>${emlist.dateofjoin}</td>
     <td>${emlist.department}</td>
 	 <td>${emlist.contact_no}</td>
 	 <td>${emlist.email}</td>
-	 <td>$100</td>
+	<td>${emlist.maxqualification}</td>
 	 <c:if test="${emlist.activestatus == 'Active'}">
 	 <td>YES</td>
 	 </c:if>
@@ -310,7 +321,7 @@ padding:0.5em;
 	 </c:if>
 	 <td><a href="${empdelete}" onclick="return confirmActiondelete();"><button type="button" class="btn btn-primary">Delete</button></a></td>
   </tr>
-  </c:forEach>
+  </c:forEach> 
  
 </table>
    </div>
@@ -324,68 +335,98 @@ padding:0.5em;
   <script type="text/javascript">
 function FormValidation()
 {
+	var count = document.getElementById('artcount').value;
   var fn=document.getElementById('firstname').value;
     if(fn == ""){
-        //alert('Please Enter First Name');
         document.getElementById('firstname').style.borderColor = "red";
+        document.getElementById('firstnamelabel').innerHTML = "Enter the Employee First name";
+        document.getElementById('firstname').focus();
         return false;
     }else{
         document.getElementById('firstname').style.borderColor = "green";
+        document.getElementById('firstnamelabel').innerHTML = "";
+        
     }
-    if (/^[0-9]+$/.test(document.getElementById("firstname").value)) {
-       //alert("First Name Contains Numbers!");
-        document.getElementById('firstname').style.borderColor = "red";
-        return false;
+    if (/^[A-Za-z][A-Za-z0-9]+$/.test(document.getElementById("firstname").value)) {
+    	 document.getElementById('firstname').style.borderColor = "green";
+         document.getElementById('firstnamelabel').innerHTML = "";
+       
+        
     }else{
-        document.getElementById('firstname').style.borderColor = "green";
+    	 document.getElementById('firstname').style.borderColor = "red";
+         document.getElementById('firstnamelabel').innerHTML = "Enter the valid Employee First name, name must start with characters";
+         document.getElementById('firstname').focus();
+         return false;
     }
-    if(fn.length <=2){
-        //alert('Your Name is To Short');
+    if(fn.length<2){
         document.getElementById('firstname').style.borderColor = "red";
+        document.getElementById('firstnamelabel').innerHTML = "Employee First name is too short";
+        document.getElementById('firstname').focus();
         return false;
-    }else{
+    }
+    else{
         document.getElementById('firstname').style.borderColor = "green";
+        document.getElementById('firstnamelabel').innerHTML = "";
     }
 	
 	var ln=document.getElementById('lastname').value;
     if(ln == ""){
-        //alert('Please Enter First Name');
         document.getElementById('lastname').style.borderColor = "red";
+        document.getElementById('lastnamelabel').innerHTML = "Enter the Employee Last name";
+        document.getElementById('lastname').focus();
+        
         return false;
     }else{
         document.getElementById('lastname').style.borderColor = "green";
+        document.getElementById('lastnamelabel').innerHTML = "";
+        
     }
-    if (/^[0-9]+$/.test(document.getElementById("lastname").value)) {
-       //alert("First Name Contains Numbers!");
-        document.getElementById('lastname').style.borderColor = "red";
-        return false;
-    }else{
+    if (/^[A-Za-z][A-Za-z0-9]+$/.test(document.getElementById("lastname").value)){
+       
         document.getElementById('lastname').style.borderColor = "green";
+        document.getElementById('lastnamelabel').innerHTML = "";
+       
+    }else{
+        document.getElementById('lastname').style.borderColor = "red";
+        document.getElementById('lastnamelabel').innerHTML = "Enter the valid Employee Last name, name must start with characters";
+        document.getElementById('lasttname').focus();
+  
+        return false;
     }
     if(ln.length <=2){
-        //alert('Your Name is To Short');
         document.getElementById('lastname').style.borderColor = "red";
+        document.getElementById('lastnamelabel').innerHTML ="Employee Last name is too short";
+       	document.getElementById('lasttname').focus();
+        
         return false;
     }else{
         document.getElementById('lastname').style.borderColor = "green";
     }
     
+    
+    
 	var ph=document.getElementById('contact').value;
     if(ph=="")
  	   {
  	   document.getElementById('contact').style.borderColor = "red";
+ 	  document.getElementById('contactlabel').innerHTML="Enter the Employee Contact number";
+ 	 document.getElementById('contact').focus();
         return false;
     }else{
         document.getElementById('contact').style.borderColor = "green";
+        document.getElementById('contactlabel').innerHTML="";
     }
    if(/^[789]\d{9}$/.test(document.getElementById("contact").value))
 	   {
 	   
 	   document.getElementById('contact').style.borderColor = "green";
+	   document.getElementById('contactlabel').innerHTML="";
 	   }
    else
    {
    document.getElementById('contact').style.borderColor = "red";
+   document.getElementById('contactlabel').innerHTML="Enter the valid Contact number";
+   document.getElementById('contact').focus();
    return false;
    }
     
@@ -394,19 +435,25 @@ function FormValidation()
     if(em=="")
  	   {
  	   document.getElementById('email').style.borderColor = "red";
+ 	  document.getElementById('emaillabel').innerHTML="Enter the Employee Email id";
+ 	 document.getElementById('email').focus();
         return false;
     }else{
         document.getElementById('email').style.borderColor = "green";
+        document.getElementById('emaillabel').innerHTML="";
     }
     if(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(document.getElementById("email").value))
     	{
     	document.getElementById('email').style.borderColor = "green";
+    	document.getElementById('emaillabel').innerHTML="";
        
     	
     	}
     else
  	   {
  	   document.getElementById('email').style.borderColor = "red";
+ 	  document.getElementById('emaillabel').innerHTML="Enter the valid Email id";
+ 	 document.getElementById('email').focus();
  	   return false;
  	   }   
 	   
@@ -431,12 +478,89 @@ function FormValidation()
 	  {
 	   document.getElementById('activestatus').style.borderColor="green";
 	  }
-	  
-}
+	
+	 }
 
 
 
     </script>
+    
+    
+    <script type="text/javascript">
+    
+    function checkqualification()
+    {
+    	alert("hi")
+    	 var count = document.getElementById('artcount').value;
+   	  
+   	  var i;
+   	  for( i=1;i<=count;i++)
+           {
+   		  var qualification = document.getElementById('qualification'+i).value;
+   		 
+   		  if(qualification=='select')
+   			  {
+   			  alert("hi")
+   			  document.getElementById('qualification'+i).style.borderColor="red";
+   			  return false;
+   			  }
+   			  else
+   			  {
+   			   document.getElementById('qualification'+i).style.borderColor="green";
+   			  }
+   		  
+   		  if(/^[a-zA-Z\s]+$/.test(document.getElementById('college'+i).value))
+   			 {
+   			 document.getElementById('college'+i).style.borderColor="green"
+   			 
+   			 }
+   		 else
+   			 {
+   			 document.getElementById('college'+i).style.borderColor="red"
+   			 }
+   		 var per = document.getElementById('percentage'+i).value;
+   		  if(/^\d{1,6}(?:\.\d{0,2})?$/.test(document.getElementById(' percentage'+i).value))
+   			 {
+   			  document.getElementById(' percentage'+i).style.borderColor = "green";
+   				   }
+   			   else
+   			   {
+   			   document.getElementById(' percentage'+i).style.borderColor = "red";
+   			   return false;
+   			   } 
+   		  if (per<= 0||per >= 100) {
+   				 document.getElementById(id).style.borderColor = "red";
+   		         return false;
+   		     }
+   			 else
+   				 {
+   				 document.getElementById(id).style.borderColor = "green";
+   				 }
+   		  
+   		  
+   		  if(/^\d{1,6}(?:\.\d{0,2})?$/.test(document.getElementById('completionyear'+i).value))
+   			 {
+   			  document.getElementById('completionyear'+i).style.borderColor = "green";
+   				   }
+   			   else
+   			   {
+   			   document.getElementById('completionyear'+i).style.borderColor = "red";
+   			   return false;
+   			   }
+   			 
+   		  
+           }
+
+    	
+    	
+    	
+    }
+    
+    
+    </script>
+    
+    
+    
 
  <script type="text/javascript">
  
@@ -460,7 +584,7 @@ function FormValidation()
 	  if(department=='select')
 	  {
 	  document.getElementById('department').style.borderColor="red";
-	  
+	  document.getElementById('department').focus();
 	  }
 	  else
 	  {
@@ -485,6 +609,7 @@ function FormValidation()
  
  
  }
+ 
  
  
  </script>
@@ -544,7 +669,7 @@ $("		  <div class='' id='qualificationgroup"+count+"' style='border:1px solid #c
 		   +"<div class='form-group'>"
             +"<label class='col-md-4 control-label' for='name' id='name-label'>Year of completion </label> "
             +"<div class='col-md-4'><div class='Form control'>"
-                +"<input  name='completionyear"+count+"' class='form-control'  type='text' id='completionyear"+count+"' title='Please fill out this field' placeholder='Enter the Employee passed out year' >"
+                +"<input  name='completionyear"+count+"' class='form-control' type='text' id='completionyear"+count+"' title='Please fill out this field' placeholder='Enter the Employee passed out year' >"
               +"</div> </div></div></div>").appendTo("#TextBoxesGroup");
 			  count=count+1;
 			  assign(count);
@@ -592,8 +717,8 @@ function confirmActiondelete() {
 	}
 }
 
-
 </script>
+
 
 </body>
 

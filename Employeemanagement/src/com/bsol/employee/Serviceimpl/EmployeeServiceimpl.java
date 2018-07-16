@@ -15,7 +15,7 @@ import com.bsol.employee.pojo.Employeee;
 public class EmployeeServiceimpl implements EmployeeService {
 
 	@Autowired
-	private EmployeeDao empdao;
+	private EmployeeDao empdao; 
 	
 	
 	@Override
@@ -35,8 +35,8 @@ public class EmployeeServiceimpl implements EmployeeService {
 
 	@Override
 	@Transactional
-	public List<Employeee> getallEmployees() {
-		List<Employeee> list = empdao.getallEmployees();
+	public List getallEmployees() {
+		List list = empdao.getallEmployees();
 		return list;
 	}
 

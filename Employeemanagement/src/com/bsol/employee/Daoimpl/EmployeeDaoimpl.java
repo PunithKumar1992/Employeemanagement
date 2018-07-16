@@ -2,13 +2,18 @@ package com.bsol.employee.Daoimpl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.NativeQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.object.SqlQuery;
 import org.springframework.stereotype.Repository;
 
 import com.bsol.employee.Dao.EmployeeDao;
+import com.bsol.employee.pojo.Educationqualification;
 import com.bsol.employee.pojo.Employeee;
 
 @Repository
@@ -44,11 +49,14 @@ public class EmployeeDaoimpl implements EmployeeDao {
 		
 	}
 	@Override
-	public List<Employeee> getallEmployees() {
+	public List getallEmployees() {
 		Session session = factory.getCurrentSession();
 		Query query = session.createQuery("from Employeee");
-		List<Employeee>list = query.list();
-		return list;
+		List list = query.list();
+		/*SQLQuery query = session.createSQLQuery("SELECT emp_id,first_name,last_name,dateofjoin,department,contact_no,email,activestatus,qualification FROM employeee e,educationqualification qe WHERE e.emp_id = qe.qemp_id AND qualificationvalue = (SELECT MAX(qualificationvalue) FROM educationqualification) GROUP BY first_name");
+		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+		List list = query.list();*/
+			return list;
 	}
 	@Override
 	public Employeee getEmpById(String empid) {
@@ -62,5 +70,6 @@ public class EmployeeDaoimpl implements EmployeeDao {
 		session.update(emp);
 		
 	}
+	
 
 }

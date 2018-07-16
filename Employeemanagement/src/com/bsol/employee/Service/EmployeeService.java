@@ -8,7 +8,7 @@ public interface EmployeeService {
 	
 	public String getlastId();
 	public void saveemployee(Employeee emp);
-	public List<Employeee> getallEmployees();
+	public List getallEmployees();
 	public Employeee getEmpById(String empid);
 	public void updateEmployee(Employeee emp);
 
