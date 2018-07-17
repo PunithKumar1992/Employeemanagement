@@ -178,8 +178,8 @@ color:red;
             <label class="col-md-4 control-label">Qualification </label>
             <div class="col-md-2">
               <div class="form control">
-               <select class="form-control" id="qualification1" name="qualification1" onchange="checkqualification(this.id); "style="width:160px;" required >
-                  <option value="Select" selected="selected"  disabled>Select Option</option>
+               <select class="form-control" id="qualification1" name="qualification1" onchange="checkqualification(this.id);" style="width:160px;" required >
+                  <option value="select" selected="selected"  disabled="true">Select Option</option>
                  <option value='SSlc'>SSlc</option>
                   <option value='PUC'>PUC</option>
 				  <option value='Diploma'>Diploma</option>
@@ -192,6 +192,7 @@ color:red;
 					  <option value='Mcom'>Mcom</option>
 					  <option value='MTech'>MTech</option>
                   </select>
+                  <label class="error" id="qualificationlabel1"></label>
               </div>
             </div>
           </div>
@@ -220,7 +221,36 @@ color:red;
             <label class="col-md-4 control-label" for="name" id="name-label">Year of completion </label>  
             <div class="col-md-4">
               <div class="Form control">
-                <input  name="completionyear1" class="form-control" type="text" id="completionyear1" onchange="checkyear(this.id);" title="Please fill out this field" placeholder="Enter the Employee passed out year" >
+              		<select class="form-control" id="completionyear1" name="completionyear1" onchange="checkyear(this.id); "style="width:160px;" required >
+                  <option value="select" selected="selected"  disabled="true">Select Option</option>
+									<option value='1992'>1992</option>
+									<option value='1993'>1993</option>
+									<option value='1994'>1994</option>
+									<option value='1995'>1995</option>
+									<option value='1996'>1996</option>
+									<option value='1997'>1997</option>
+									<option value='1998'>1998</option>
+									<option value='1999'>1999</option>
+									<option value='2000'>2000</option>
+									<option value='2001'>2001</option>
+									<option value='2002'>2002</option>
+									<option value='2003'>2003</option>
+									<option value='2004'>2004</option>
+									<option value='2005'>2005</option>
+									<option value='2006'>2006</option>
+									<option value='2007'>2007</option>
+									<option value='2008'>2008</option>
+									<option value='2009'>2009</option>
+									<option value='2010'>2010</option>
+									<option value='2011'>2011</option>
+									<option value='2012'>2012</option>
+									<option value='2013'>2013</option>
+									<option value='2014'>2014</option>
+									<option value='2015'>2015</option>
+									<option value='2016'>2016</option>
+									<option value='2017'>2017</option>
+									<option value='2018'>2018</option>
+								</select>
               		<label class="error" id="completionyearlabel1"></label>
               </div>
              </div>
@@ -514,23 +544,28 @@ function FormValidation()
  
  }
  
- function checkqualification(id)
+ function checkqualificationinner(id)
  {
-	 var qualification = document.getElementById('qualification'+id).value;
-		 
-		  if(qualification=='select')
+	 var qualification1 = document.getElementById('qualification'+id).value;
+	
+		  if(qualification1 == 'select')
 			  {
 			  document.getElementById('qualification'+id).style.borderColor="red";
+			  document.getElementById('qualificationlabel'+id).innerHTML="Please Select the Qualification";
+			  document.getElementById('qualification'+id).focus();
 			  return false;
 			  }
-			  else if(qualification != 'select')
+			  else if(qualification1 != 'select')
 			  {
-			   document.getElementById('qualification'+i).style.borderColor="green";
+			   document.getElementById('qualification'+id).style.borderColor="green";
+			   document.getElementById('qualificationlabel'+id).innerHTML="";
+			   document.getElementById('qualification'+id).focus();
 			  }
  }
  
- function checkcollege(id)
+ function checkcollegeinner(id)
  {
+	 
 	 if(/^[a-zA-Z\s]+$/.test(document.getElementById('college'+id).value))
 		 {
 		 document.getElementById('college'+id).style.borderColor="green"
@@ -544,41 +579,162 @@ function FormValidation()
 		 document.getElementById('college'+id).focus();
 		 
 		 }
- }
+ } 
  
- function checkpercent(id)
+ function checkpercentinner(id)
  {
 	 var per = document.getElementById('percentage'+id).value;
-		  if(/^\d{1,6}(?:\.\d{0,2})?$/.test(document.getElementById(' percentage'+id).value))
+		  if(/^\d{1,6}(?:\.\d{0,2})?$/.test(document.getElementById('percentage'+id).value))
 			 {
-			  document.getElementById(' percentage'+id).style.borderColor = "green";
+			  document.getElementById('percentage'+id).style.borderColor = "green";
+			  document.getElementById('percentagelabel'+id).innerHTML="";
+			  
 				   }
 			   else
 			   {
-			   document.getElementById(' percentage'+id).style.borderColor = "red";
+			   document.getElementById('percentage'+id).style.borderColor = "red";
+			   document.getElementById('percentagelabel'+id).innerHTML="Please enter the valid percentage";
+			   document.getElementById('percentage'+id).foucs();
 			   return false;
 			   } 
 		  if (per<= 0||per >= 100) {
 				 document.getElementById('percentage'+id).style.borderColor = "red";
+				 document.getElementById('percentagelabel'+id).innerHTML="Please enter the percentage in 0 to 100 % only";
 		         return false;
 		     }
 			 else
 				 {
 				 document.getElementById('percentage'+id).style.borderColor = "green";
+				 document.getElementById('percentagelabel'+id).innerHTML="";
 				 }
+ }
+ function checkyearinner(id)
+ {
+	
+	 var year = document.getElementById('completionyear'+id).value;
+		 
+		  if(year=='select')
+			  {
+			  document.getElementById('completionyear'+id).style.borderColor="red";
+			  document.getElementById('completionyearlabel'+id).innerHTML="Please Select the Completion Year";
+			  document.getElementById('completionyear'+id).focus();
+			  
+			  return false;
+			  }
+			  else if(year != 'select')
+			  {
+			   document.getElementById('completionyear'+id).style.borderColor="green";
+			   document.getElementById('completionyearlabel'+id).innerHTML="";
+			  }
+	
+ }
+ 
+ 
+ function checkqualification(id)
+ {
+	cid=id.substring(13);
+	 var qualification = document.getElementById(id).value;
+		 
+		  if(qualification=='select')
+			  {
+			  document.getElementById(id).style.borderColor="red";
+			  document.getElementById('qualificationlabel'+cid).innerHTML="Please Select the Qualification";
+			  document.getElementById(id).focus();
+			  
+			  return false;
+			  }
+			  else if(qualification != 'select')
+			  {
+			   document.getElementById(id).style.borderColor="green";
+			   document.getElementById('qualificationlabel'+cid).innerHTML="";
+			  }
+		 	 checkcollegeinner(cid);
+			 checkpercentinner(cid);
+			 checkyearinner(cid);
+ }
+ 
+ 
+ function checkcollege(id)
+ {
+	 var qid= id.substring(7);
 	 
+	 if(/^[a-zA-Z\s]+$/.test(document.getElementById(id).value))
+		 {
+		 document.getElementById(id).style.borderColor="green"
+			 document.getElementById('collegelabel'+qid).innerHTML="";
+		 
+		 }
+	 else
+		 {
+		 document.getElementById(id).style.borderColor="red"
+			 document.getElementById('collegelabel'+qid).innerHTML="Enter valid college name College name not numeric or special characters";
+		 document.getElementById(id).focus();
+		 
+		 }
+	 checkqualificationinner(qid);
+	 checkpercentinner(qid);
+	 checkyearinner(cid);
+ }
+ 
+ function checkpercent(id)
+ {
+	var pid=id.substring(10);
+	 var per = document.getElementById(id).value;
+		  if(/^\d{1,6}(?:\.\d{0,2})?$/.test(document.getElementById(id).value))
+			 {
+			  document.getElementById(id).style.borderColor = "green";
+			  document.getElementById('percentagelabel'+pid).innerHTML="";
+			  
+				   }
+			   else
+			   {
+			   document.getElementById(id).style.borderColor = "red";
+			   document.getElementById('percentagelabel'+pid).innerHTML="Please enter the valid percentage";
+			   document.getElementById(id).foucs();
+			   return false;
+			   } 
+		  if (per<= 0||per >= 100) {
+				 document.getElementById(id).style.borderColor = "red";
+				 document.getElementById('percentagelabel'+pid).innerHTML="Please enter the percentage in 0 to 100 % only";
+		         return false;
+		     }
+			 else
+				 {
+				 document.getElementById(id).style.borderColor = "green";
+				 document.getElementById('percentagelabel'+pid).innerHTML="";
+				 }
+		  checkqualificationinner(pid);
+		  checkcollegeinner(pid);
+		  checkyearinner(cid);
 	 
 	 
  }
  
+ function checkyear(id)
+ {
+	 
+	 cid=id.substring(14);
+	 var year = document.getElementById(id).value;
+		 
+		  if(year == 'select')
+			  {
+			  document.getElementById(id).style.borderColor="red";
+			  document.getElementById('completionyearlabel'+cid).innerHTML="Please Select the Completion Year";
+			  document.getElementById(id).focus();
+			  
+			  return false;
+			  }
+			  else if(year != 'select')
+			  {
+			   document.getElementById(id).style.borderColor="green";
+			   document.getElementById('completionyearlabel'+cid).innerHTML="";
+			  }
+		  checkqualificationinner(cid);
+		  checkcollegeinner(cid);
+		  checkpercentinner(cid);
+	
+ }
 
- 
-
- 
-
- 
- 
- 
  </script>
  
 <script type="text/javascript">
@@ -614,8 +770,8 @@ $("		  <div class='' id='qualificationgroup"+count+"' style='border:1px solid #c
 		  +"<div class='form-group'>"
             +"<label class='col-md-4 control-label'>Qualification </label>"
             +"<div class='col-md-2'><div class='form control'>"
-              +" <select class='form-control' id='qualification"+count+"' name='qualification"+count+"' style='width:160px;'>"
-                 +" <option value='Select' selected='selected' disabled>Select Option</option>"
+              +" <select class='form-control' id='qualification"+count+"' name='qualification"+count+"' onchange='checkqualification(this.id);'  style='width:160px;'>"
+                 +" <option value='select' selected='selected' disabled>Select Option</option>"
                  +" <option value='SSlc'>SSlc</option>"
                   +"<option value='PUC'>PUC</option>"
 				  +"<option value='Diploma'>Diploma</option>"
@@ -629,18 +785,32 @@ $("		  <div class='' id='qualificationgroup"+count+"' style='border:1px solid #c
 					    +"<option value='MTech'>MTech</option>"
 				  
                  +" </select></div></div> </div>"
+                 +" <label class='error' id='qualificationlabel"+count+"'></label>"
 		   +"<div class='form-group'><label class='col-md-4 control-label' for='name' id='name-label'>University/College</label>  <div class='col-md-4'>"
               +"<div class='Form control'>"
-               +" <input  name='college"+count+"' class='form-control'  type='text' id='college"+count+"' title='Please fill out this field' placeholder='Enter the Employee University/college' >"
-              +"</div></div> </div>"
+               +" <input  name='college"+count+"' class='form-control'  type='text' id='college"+count+"' onchange='checkcollege(this.id);' title='Please fill out this field' placeholder='Enter the Employee University/college' >"
+              +"<label class='error' id='collegelabel"+count +"'></label>"
+               +"</div></div> </div>"
 		  +"<div class='form-group'>"
     +" <label class='col-md-4 control-label' for='name' id='name-label'>Percentage %</label>  <div class='col-md-4'><div class='Form control'>"
-            +"    <input  name='percentage"+count+"' class='form-control'  type='text' id='percentage"+count+"' title='Please fill out this field' placeholder='Enter the Employee percentage' >"
-              +"</div> </div></div>"
+            +"    <input  name='percentage"+count+"' class='form-control'  type='text' id='percentage"+count+"' onchange='checkpercent(this.id);' title='Please fill out this field' placeholder='Enter the Employee percentage' >"
+             +"<label class='error' id='percentagelabel"+count+"'></label>"
+            +"</div> </div></div>"
 		   +"<div class='form-group'>"
             +"<label class='col-md-4 control-label' for='name' id='name-label'>Year of completion </label> "
             +"<div class='col-md-4'><div class='Form control'>"
-                +"<input  name='completionyear"+count+"' class='form-control' type='text' id='completionyear"+count+"' title='Please fill out this field' placeholder='Enter the Employee passed out year' >"
+            +"<select class='form-control' id='completionyear"+count+"' name='completionyear"+count+"' onchange='checkyear(this.id);' style='width:160px;' required >"
+           +"  <option value='select' selected='selected'  disabled='true'>Select Option</option>"
+					+"			<option value='1992'>1992</option><option value='1993'>1993</option><option value='1994'>1994</option>"
+					+"			<option value='1995'>1995</option><option value='1996'>1996</option><option value='1997'>1997</option>"
+					+"			<option value='1998'>1998</option><option value='1999'>1999</option><option value='2000'>2000</option>"
+					+"			<option value='2001'>2001</option><option value='2002'>2002</option><option value='2003'>2003</option>"
+					+"			<option value='2004'>2004</option><option value='2005'>2005</option><option value='2006'>2006</option>"
+					+"			<option value='2007'>2007</option><option value='2008'>2008</option><option value='2009'>2009</option>"
+					+"			<option value='2010'>2010</option><option value='2011'>2011</option><option value='2012'>2012</option>"
+					+"			<option value='2013'>2013</option><option value='2014'>2014</option><option value='2015'>2015</option>"
+					+"			<option value='2016'>2016</option><option value='2017'>2017</option><option value='2018'>2018</option>"
+					+"	</select><label class='error' id='completionyearlabel"+count+"'></label>"
               +"</div> </div></div></div>").appendTo("#TextBoxesGroup");
 			  count=count+1;
 			  assign(count);

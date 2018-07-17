@@ -50,7 +50,7 @@ public class Employeee {
 	private String activestatus;
 	
 	
-	@OneToMany(mappedBy="empdetail",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="empdetail",cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE,CascadeType.DETACH}, fetch = FetchType.EAGER)
 	private List<Educationqualification>eduqualification=new ArrayList<Educationqualification>();
 
 	public String getEmp_id() {

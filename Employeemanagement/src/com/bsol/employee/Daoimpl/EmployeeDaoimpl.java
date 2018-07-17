@@ -55,7 +55,7 @@ public class EmployeeDaoimpl implements EmployeeDao {
 		List list = query.list();*/
 		SQLQuery query = session.createSQLQuery("SELECT emp_id,first_name,last_name,dateofjoin,department,contact_no,email,activestatus,B.qualification FROM (" + 
 				"SELECT emp_id,first_name,last_name,dateofjoin,department,contact_no,email,activestatus,qemp_id,MAX(qualificationvalue) AS ValueQ,qualification FROM educationqualification d,employeee c WHERE c.`emp_id`=d.`qemp_id` GROUP BY qemp_id" + 
-				") AS A JOIN educationqualification B ON A.qemp_id=B.qemp_id AND A.ValueQ=B.qualificationvalue");
+				") AS A JOIN educationqualification B ON A.qemp_id=B.qemp_id AND A.ValueQ=B.qualificationvalue GROUP BY emp_id");
 		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 		List list = query.list();
 			return list;
