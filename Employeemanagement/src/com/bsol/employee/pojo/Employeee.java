@@ -49,10 +49,7 @@ public class Employeee {
 	@Column(name="activestatus")
 	private String activestatus;
 	
-	@Column(name="maxqualification")
-	private String maxqualification;
 	
-
 	@OneToMany(mappedBy="empdetail",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<Educationqualification>eduqualification=new ArrayList<Educationqualification>();
 
@@ -159,14 +156,7 @@ public class Employeee {
 	public void setEduqualification(List<Educationqualification> eduqualification) {
 		this.eduqualification = eduqualification;
 	}
-	
-	public String getMaxqualification() {
-		return maxqualification;
-	}
 
-	public void setMaxqualification(String maxqualification) {
-		this.maxqualification = maxqualification;
-	}
 
 	@Override
 	public String toString() {

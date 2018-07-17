@@ -92,13 +92,11 @@ public class Employeecontroller {
 			 {
 			 case "SSlc":
 				 qulificationarry[i-1].setQualificationvalue(1);
-				 maxquali=quali;
 				 break;
 		
 			 case "PUC":
 			 case "Diploma":
 				 qulificationarry[i-1].setQualificationvalue(2);
-				 maxquali=quali;
 				 break;
 				 
 			 case "BA":
@@ -106,7 +104,6 @@ public class Employeecontroller {
 			 case "Bcom":
 			 case "BE":
 				 qulificationarry[i-1].setQualificationvalue(3);
-				 maxquali=quali;
 				 break;
 				 
 			 case "MA":
@@ -114,12 +111,10 @@ public class Employeecontroller {
 			 case "Mcom":
 			 case "MTech":
 				 qulificationarry[i-1].setQualificationvalue(4);
-				 maxquali=quali;
 				 break;
 				 
 			default :
 				 qulificationarry[i-1].setQualificationvalue(0);
-				 maxquali="Not Mentioned";
 				 break;
 				 
 			 }
@@ -132,7 +127,6 @@ public class Employeecontroller {
 			qualilist.add(qulificationarry[i-1]);
 		}
 		emp.setEduqualification(qualilist);
-		emp.setMaxqualification(maxquali);
 		empservice.saveemployee(emp);
 		return"redirect:/index";
 	}

@@ -71,7 +71,7 @@ color:red;
             <label class="col-md-4 control-label" for="name" id="name-label">First Name <span style="color:red;">*</span></label>  
             <div class="col-md-4">
               <div class="Form control">
-                <form:input  path="first_name" class="form-control" id="firstname" title="Please fill out this field" placeholder="Enter the Employee first name"/>
+                <form:input  path="first_name" class="form-control" id="firstname" title="Please fill out this field" onchange="return FormValidation();" onblur="return FormValidation();"  placeholder="Enter the Employee first name"/>
                <label id="firstnamelabel" class="error"></label>
               </div>
              </div>
@@ -81,7 +81,7 @@ color:red;
             <label class="col-md-4 control-label" for="name" id="name-label">Last Name <span style="color:red;">*</span></label>  
             <div class="col-md-4">
               <div class="Form control">
-                <form:input  path="last_name" class="form-control"  id="lastname" title="Please fill out this field" placeholder="Enter the Employee last name" />
+                <form:input  path="last_name" class="form-control"  id="lastname" title="Please fill out this field" onchange="return FormValidation();" onblur="return FormValidation();" placeholder="Enter the Employee last name" />
               	 <label id="lastnamelabel" class="error"></label>
               </div>
              </div>
@@ -107,8 +107,8 @@ color:red;
             <label class="col-md-4 control-label">Department <span style="color:red;">*</span></label>
             <div class="col-md-2">
               <div class="form control">
-              <form:select path="department" class="form-control" id="department" style="width:160px;" required="required" onchange="checkdep();">
-               <form:option value="select" selected="selected"  disabled="true" >Select Option</form:option>
+              <form:select path="department" class="form-control" id="department" style="width:160px;" required="required" onchange="return FormValidation();">
+               <form:option value="select" selected="selected"  disabled="true" hidden="true">Select Option</form:option>
               	  <form:option value="Testing">Testing </form:option>
                   <form:option value="Development">Development</form:option>
                   <form:option value="Analysis">Analysis</form:option>
@@ -133,7 +133,7 @@ color:red;
             <div class="col-md-2">
               <div class="form control">
                <form:select class="form-control" id="dropdown" style="width:160px;" path="experience" required="required">
-                  <form:option value="Select" selected="selected" disabled="true">Select Option</form:option>
+                  <form:option value="Select" selected="selected" disabled="true" hidden="true" >Select Option</form:option>
                   <form:option value="YES">YES </form:option>
                   <form:option value="NO">NO</form:option>
                   </form:select>
@@ -178,7 +178,7 @@ color:red;
             <label class="col-md-4 control-label">Qualification </label>
             <div class="col-md-2">
               <div class="form control">
-               <select class="form-control" id="qualification1" name="qualification1" style="width:160px;" required >
+               <select class="form-control" id="qualification1" name="qualification1" onchange="checkqualification(this.id); "style="width:160px;" required >
                   <option value="Select" selected="selected"  disabled>Select Option</option>
                  <option value='SSlc'>SSlc</option>
                   <option value='PUC'>PUC</option>
@@ -200,7 +200,8 @@ color:red;
             <label class="col-md-4 control-label" for="name" id="name-label">University/College</label>  
             <div class="col-md-4">
               <div class="Form control">
-                <input  name="college1" class="form-control"  type="text" id="college1" title="Please fill out this field" placeholder="Enter the Employee University/college" >
+                <input  name="college1" class="form-control"  type="text" id="college1" onchange="checkcollege(this.id);" title="Please fill out this field" placeholder="Enter the Employee University/college" >
+                <label class="error" id="collegelabel1"></label>
               </div>
              </div>
           </div>
@@ -209,7 +210,8 @@ color:red;
             <label class="col-md-4 control-label" for="name" id="name-label">Percentage %</label>  
             <div class="col-md-4">
               <div class="Form control">
-                <input  name="percentage1" class="form-control" type="text" id="percentage1"  title="Please fill out this field" placeholder="Enter the Employee percentage" >
+                <input  name="percentage1" class="form-control" type="text" id="percentage1" onchange="checkpercent(this.id);"  title="Please fill out this field" placeholder="Enter the Employee percentage" >
+               <label class="error" id="percentagelabel1"></label>
               </div>
              </div>
           </div>
@@ -218,7 +220,8 @@ color:red;
             <label class="col-md-4 control-label" for="name" id="name-label">Year of completion </label>  
             <div class="col-md-4">
               <div class="Form control">
-                <input  name="completionyear1" class="form-control" type="text" id="completionyear1" title="Please fill out this field" placeholder="Enter the Employee passed out year" >
+                <input  name="completionyear1" class="form-control" type="text" id="completionyear1" onchange="checkyear(this.id);" title="Please fill out this field" placeholder="Enter the Employee passed out year" >
+              		<label class="error" id="completionyearlabel1"></label>
               </div>
              </div>
           </div>
@@ -231,7 +234,7 @@ color:red;
             <label class="col-md-4 control-label" for="name" id="name-label">Contact no <span style="color:red;">*</span> </label>  
             <div class="col-md-4">
               <div class="Form control">
-                <form:input  path="contact_no" class="form-control" id="contact" title="Please fill out this field" placeholder="Enter the Employee Contact number" />
+                <form:input  path="contact_no" class="form-control" id="contact" title="Please fill out this field" onchange="return FormValidation();" placeholder="Enter the Employee Contact number" />
              	<label id="contactlabel" class="error"></label>
               </div>
              </div>
@@ -253,11 +256,12 @@ color:red;
             <label class="col-md-4 control-label">Active Status <span style="color:red;" required="">*</span> </label>
             <div class="col-md-2">
               <div class="form control">
-               <form:select class="form-control" id="activestatus" path="activestatus" style="width:160px;" required="required" onchange="checkactive();">
-                  <form:option value="select" selected="selected" disabled="true">Select Option</form:option>
+               <form:select class="form-control" id="activestatus" path="activestatus" style="width:160px;" required="required" onchange="return FormValidation();">
+                  <form:option value="select" selected="selected" disabled="true" hidden="true" >Select Option</form:option>
                   <form:option value="Active">Active </form:option>
                   <form:option value="InActive">InActive</form:option>
                   </form:select>
+                   <label class="error" id="activestatuslabel"></label>
               </div>
             </div>
           </div>
@@ -312,7 +316,7 @@ color:red;
     <td>${emlist.department}</td>
 	 <td>${emlist.contact_no}</td>
 	 <td>${emlist.email}</td>
-	<td>${emlist.maxqualification}</td>
+	<td>${emlist.qualification}</td>
 	 <c:if test="${emlist.activestatus == 'Active'}">
 	 <td>YES</td>
 	 </c:if>
@@ -402,8 +406,19 @@ function FormValidation()
     }else{
         document.getElementById('lastname').style.borderColor = "green";
     }
-    
-    
+        
+    var department = document.getElementById('department').value;
+	  if(department=='select')
+	  {
+	  document.getElementById('department').style.borderColor="red";
+	  document.getElementById('department').focus();
+	  document.getElementById('departmentlabel').innerHTML="Please Select the Department"
+	  }
+	  else if(department != 'select')
+	  {
+	   document.getElementById('department').style.borderColor="green";
+	   document.getElementById('departmentlabel').innerHTML="";
+	  }
     
 	var ph=document.getElementById('contact').value;
     if(ph=="")
@@ -457,26 +472,20 @@ function FormValidation()
  	   return false;
  	   }   
 	   
-	   var department = document.getElementById('department').value;
-	  if(department=='select')
-	  {
-	  document.getElementById('department').style.borderColor="red";
-	  return false;
-	  }
-	  else
-	  {
-	   document.getElementById('department').style.borderColor="green";
-	  }
+	 
 	  
-	  var active = document.getElementById('activestatus').value;
-	  if(active=='select')
+	  var activestatus = document.getElementById('activestatus').value;
+	  if(activestatus=='select')
 	  {
 	  document.getElementById('activestatus').style.borderColor="red";
+	  document.getElementById('activestatus').focus();
+	  document.getElementById('activestatuslabel').innerHTML="Please Select the active status";
 	  return false;
 	  }
-	  else
+	  else if(activestatus != 'select')
 	  {
 	   document.getElementById('activestatus').style.borderColor="green";
+	   document.getElementById('activestatuslabel').innerHTML="";
 	  }
 	
 	 }
@@ -486,80 +495,7 @@ function FormValidation()
     </script>
     
     
-    <script type="text/javascript">
-    
-    function checkqualification()
-    {
-    	alert("hi")
-    	 var count = document.getElementById('artcount').value;
-   	  
-   	  var i;
-   	  for( i=1;i<=count;i++)
-           {
-   		  var qualification = document.getElementById('qualification'+i).value;
-   		 
-   		  if(qualification=='select')
-   			  {
-   			  alert("hi")
-   			  document.getElementById('qualification'+i).style.borderColor="red";
-   			  return false;
-   			  }
-   			  else
-   			  {
-   			   document.getElementById('qualification'+i).style.borderColor="green";
-   			  }
-   		  
-   		  if(/^[a-zA-Z\s]+$/.test(document.getElementById('college'+i).value))
-   			 {
-   			 document.getElementById('college'+i).style.borderColor="green"
-   			 
-   			 }
-   		 else
-   			 {
-   			 document.getElementById('college'+i).style.borderColor="red"
-   			 }
-   		 var per = document.getElementById('percentage'+i).value;
-   		  if(/^\d{1,6}(?:\.\d{0,2})?$/.test(document.getElementById(' percentage'+i).value))
-   			 {
-   			  document.getElementById(' percentage'+i).style.borderColor = "green";
-   				   }
-   			   else
-   			   {
-   			   document.getElementById(' percentage'+i).style.borderColor = "red";
-   			   return false;
-   			   } 
-   		  if (per<= 0||per >= 100) {
-   				 document.getElementById(id).style.borderColor = "red";
-   		         return false;
-   		     }
-   			 else
-   				 {
-   				 document.getElementById(id).style.borderColor = "green";
-   				 }
-   		  
-   		  
-   		  if(/^\d{1,6}(?:\.\d{0,2})?$/.test(document.getElementById('completionyear'+i).value))
-   			 {
-   			  document.getElementById('completionyear'+i).style.borderColor = "green";
-   				   }
-   			   else
-   			   {
-   			   document.getElementById('completionyear'+i).style.borderColor = "red";
-   			   return false;
-   			   }
-   			 
-   		  
-           }
-
-    	
-    	
-    	
-    }
-    
-    
-    </script>
-    
-    
+  
     
 
  <script type="text/javascript">
@@ -578,37 +514,68 @@ function FormValidation()
  
  }
  
- function checkdep()
+ function checkqualification(id)
  {
-  var department = document.getElementById('department').value;
-	  if(department=='select')
-	  {
-	  document.getElementById('department').style.borderColor="red";
-	  document.getElementById('department').focus();
-	  }
-	  else
-	  {
-	   document.getElementById('department').style.borderColor="green";
-	  }
- 
- 
+	 var qualification = document.getElementById('qualification'+id).value;
+		 
+		  if(qualification=='select')
+			  {
+			  document.getElementById('qualification'+id).style.borderColor="red";
+			  return false;
+			  }
+			  else if(qualification != 'select')
+			  {
+			   document.getElementById('qualification'+i).style.borderColor="green";
+			  }
  }
  
- function checkactive()
+ function checkcollege(id)
  {
-  var department = document.getElementById('activestatus').value;
-	  if(department=='select')
-	  {
-	  document.getElementById('activestatus').style.borderColor="red";
-	  
-	  }
-	  else
-	  {
-	   document.getElementById('activestatus').style.borderColor="green";
-	  }
- 
- 
+	 if(/^[a-zA-Z\s]+$/.test(document.getElementById('college'+id).value))
+		 {
+		 document.getElementById('college'+id).style.borderColor="green"
+			 document.getElementById('collegelabel'+id).innerHTML="";
+		 
+		 }
+	 else
+		 {
+		 document.getElementById('college'+id).style.borderColor="red"
+			 document.getElementById('collegelabel'+id).innerHTML="Enter valid college name College name not numeric or special characters";
+		 document.getElementById('college'+id).focus();
+		 
+		 }
  }
+ 
+ function checkpercent(id)
+ {
+	 var per = document.getElementById('percentage'+id).value;
+		  if(/^\d{1,6}(?:\.\d{0,2})?$/.test(document.getElementById(' percentage'+id).value))
+			 {
+			  document.getElementById(' percentage'+id).style.borderColor = "green";
+				   }
+			   else
+			   {
+			   document.getElementById(' percentage'+id).style.borderColor = "red";
+			   return false;
+			   } 
+		  if (per<= 0||per >= 100) {
+				 document.getElementById('percentage'+id).style.borderColor = "red";
+		         return false;
+		     }
+			 else
+				 {
+				 document.getElementById('percentage'+id).style.borderColor = "green";
+				 }
+	 
+	 
+	 
+ }
+ 
+
+ 
+
+ 
+
  
  
  
@@ -628,6 +595,10 @@ function FormValidation()
         });
     });
 </script>
+
+
+
+
 <script type="text/javascript">
 $(document).ready(function(){
 var count =2;

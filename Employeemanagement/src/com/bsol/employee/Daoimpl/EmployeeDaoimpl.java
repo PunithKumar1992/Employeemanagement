@@ -51,11 +51,13 @@ public class EmployeeDaoimpl implements EmployeeDao {
 	@Override
 	public List getallEmployees() {
 		Session session = factory.getCurrentSession();
-		Query query = session.createQuery("from Employeee");
-		List list = query.list();
-		/*SQLQuery query = session.createSQLQuery("SELECT emp_id,first_name,last_name,dateofjoin,department,contact_no,email,activestatus,qualification FROM employeee e,educationqualification qe WHERE e.emp_id = qe.qemp_id AND qualificationvalue = (SELECT MAX(qualificationvalue) FROM educationqualification) GROUP BY first_name");
-		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+		/*Query query = session.createQuery("from Employeee");
 		List list = query.list();*/
+		SQLQuery query = session.createSQLQuery("SELECT emp_id,first_name,last_name,dateofjoin,department,contact_no,email,activestatus,B.qualification FROM (" + 
+				"SELECT emp_id,first_name,last_name,dateofjoin,department,contact_no,email,activestatus,qemp_id,MAX(qualificationvalue) AS ValueQ,qualification FROM educationqualification d,employeee c WHERE c.`emp_id`=d.`qemp_id` GROUP BY qemp_id" + 
+				") AS A JOIN educationqualification B ON A.qemp_id=B.qemp_id AND A.ValueQ=B.qualificationvalue");
+		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+		List list = query.list();
 			return list;
 	}
 	@Override
