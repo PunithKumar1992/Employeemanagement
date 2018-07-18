@@ -315,7 +315,7 @@ color:red;
         </div>
       </div>
       <div class="container survey">
-      <form class="well form-horizontal" id="survey-form" style="max-width:1024px;">
+      <form class="well form-horizontal" id="survey-form" style="max-width:1115px;">
      
           <div class="form-group" style="overflow-x:auto;">
 		
@@ -325,10 +325,10 @@ color:red;
     <th style="padding:1em;background-color:#3a4660;color:#fff;">Name</th>
     <th style="padding:1em;background-color:#3a4660;color:#fff;">Date_of_Join</th>
 	<th style="padding:1em;background-color:#3a4660;color:#fff;">Department</th>
-	<th style="padding:1em;background-color:#3a4660;color:#fff;">Contact NO </th>
-	<th style="padding:1em;background-color:#3a4660;color:#fff;">EMail Id</th>
-	<th style="padding:1em;background-color:#3a4660;color:#fff;">Highest Qualification</th>
-	<th style="padding:1em;background-color:#3a4660;color:#fff;">Employee Status</th>
+	<th style="padding:1em;background-color:#3a4660;color:#fff;">Contact_NO </th>
+	<th style="padding:1em;background-color:#3a4660;color:#fff;">EMail_Id</th>
+	<th style="padding:1em;background-color:#3a4660;color:#fff;">Highest_Qualification</th>
+	<th style="padding:1em;background-color:#3a4660;color:#fff;">Employee_Status</th>
 	<th style="padding:1em;background-color:#3a4660;color:#fff;">Action</th>
 	
   </tr>

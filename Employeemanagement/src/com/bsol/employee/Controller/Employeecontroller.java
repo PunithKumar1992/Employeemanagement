@@ -62,12 +62,10 @@ public class Employeecontroller {
 		 qulificationarry[i] = new Educationqualification();
 	 }
 		 String quali="";
-		 String college;
-		 int percentage;
-		 int year ;
 		 
 		 for(int i=1;i<=count;i++)
 		 {
+			
 			 if(reqparam.get("qualification"+i)!=null)
 			 quali = reqparam.get("qualification"+i);
 			 else
@@ -88,6 +86,7 @@ public class Employeecontroller {
 			 qulificationarry[i-1].setCompletionyear(Integer.parseInt(reqparam.get("completionyear"+i)));
 			 else
 				 qulificationarry[i-1].setCompletionyear(0);
+			 
 			 switch(quali)
 			 {
 			 case "SSlc":
@@ -168,6 +167,7 @@ public class Employeecontroller {
 			 
 			 for(int i=1;i<=count;i++)
 			 {
+				 qulificationarry[i-1].setEduquali_id(Integer.parseInt(reqparam.get("eduquali_id"+i)));
 				 if(reqparam.get("qualification"+i)!=null)
 				 quali = reqparam.get("qualification"+i);
 				 else

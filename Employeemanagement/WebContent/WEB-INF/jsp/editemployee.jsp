@@ -178,6 +178,7 @@ color:red;
 		 <div id="TextBoxesGroup"> 
 		  <input type="hidden" name="qdivcount" value="${fn:length(editemp.eduqualification)}">
 		 <c:forEach var="qualilist" items="${editemp.eduqualification}" varStatus="theCount">
+		 <input type="hidden" name="eduquali_id${theCount.count}" value="${qualilist.eduquali_id}" >
 		  <div class="" id="qualificationgroup1" style="border:1px solid #cfcdd3;width:70%;margin-left:10%;margin-bottom:5%">
 		  <div class="form-group"> 
             <label class="col-md-4 control-label">Qualification </label>

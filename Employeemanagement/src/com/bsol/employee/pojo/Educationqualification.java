@@ -109,7 +109,7 @@ public class Educationqualification {
 	public String toString() {
 		return "Educationqualification [eduquali_id=" + eduquali_id + ", qualification=" + qualification + ", college="
 				+ college + ", completionyear=" + completionyear + ", percentage=" + percentage
-				+ ", qualificationvalue=" + qualificationvalue + ", qemp_id=" + qemp_id + ", empdetail=" + empdetail
+				+ ", qualificationvalue=" + qualificationvalue + ", qemp_id=" + qemp_id  +", empdetail=" + empdetail
 				+ "]";
 	}
 	
